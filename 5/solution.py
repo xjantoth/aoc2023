@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import re
 data = open(0).read()
-# data = open("input.txt").read()
 
 regex = r"(.\n?)*(?=\n\n|\Z)"
 matches = re.finditer(regex, data, re.MULTILINE)
@@ -16,30 +15,23 @@ s = {re.sub(r"\smap:", "", i.split("\n")[0]):
 # {
 #     'seed-to-soil map:': [[50, 98, 2], [52, 50, 48]], 
 #     'soil-to-fertilizer map:': [[0, 15, 37], [37, 52, 2], [39, 0, 15]], 
-#     ...
 
 step = "seed"
 while True:
     key = [w for w in s.keys() if w.split("-")[0] == step]
     if len(key) == 0:
-        print("break cond.")
         break
 
     key = key[0] # take first element since there will always be just one key
-    print(f"*** {key} ***")
     for seed in seeds:
         idx_seed = seeds.index(seed)
-        for p in s[key]:
-            "processing {}"
+        for p in s[key]: # p: [d, s , r]
             if seed in range(p[1], p[1]+p[2]):
-                # [d, s , r]
                 seeds[idx_seed] = p[0] + abs(seed - p[1])
-        print(seeds)
 
-    # seeds = list(map(lambda n: res[key].get(n, n), seeds))
     step = key.split("-")[2]
 
-print(seeds, "mininal: " , min(seeds))
+print(min(seeds))
 
     
     
