@@ -2,7 +2,7 @@
 import re
 from itertools import pairwise
 
-datar = [re.findall(r"\d+", i.strip("\n")) for i in open(0).readlines()]
+datar = [re.findall(r"-?\d+", i.strip("\n")) for i in open(0).readlines()]
 data = [list(map(lambda x: int(x), i)) for i in datar]
 
 # data = open("input.txt").read()
